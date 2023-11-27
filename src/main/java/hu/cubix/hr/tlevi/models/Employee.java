@@ -1,4 +1,4 @@
-package hu.cubix.hr.tlevi.Models;
+package hu.cubix.hr.tlevi.models;
 
 import java.time.LocalDateTime;
 

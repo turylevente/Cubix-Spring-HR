@@ -1,6 +1,6 @@
-package hu.cubix.hr.tlevi.Services;
+package hu.cubix.hr.tlevi.services;
 
-import hu.cubix.hr.tlevi.Models.Employee;
+import hu.cubix.hr.tlevi.models.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

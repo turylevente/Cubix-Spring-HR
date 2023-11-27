@@ -1,4 +1,4 @@
-package hu.cubix.hr.tlevi.Configurations;
+package hu.cubix.hr.tlevi.configurations;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
-package hu.cubix.hr.tlevi.Configurations;
+package hu.cubix.hr.tlevi.configurations;
 
-import hu.cubix.hr.tlevi.Services.EmployeeService;
-import hu.cubix.hr.tlevi.Services.SmartEmployeeService;
+import hu.cubix.hr.tlevi.services.EmployeeService;
+import hu.cubix.hr.tlevi.services.SmartEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
