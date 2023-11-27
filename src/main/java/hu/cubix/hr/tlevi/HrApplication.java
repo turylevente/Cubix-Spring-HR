@@ -1,8 +1,8 @@
 package hu.cubix.hr.tlevi;
 
-import hu.cubix.hr.tlevi.Models.Employee;
-import hu.cubix.hr.tlevi.Services.EmployeeService;
-import hu.cubix.hr.tlevi.Services.SalaryService;
+import hu.cubix.hr.tlevi.models.Employee;
+import hu.cubix.hr.tlevi.services.EmployeeService;
+import hu.cubix.hr.tlevi.services.SalaryService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
