@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Human Resources</title>
+    </head>
+<body>
+<h1>Human Resources Application </h1>
+<ul>
+    <li th:each="employee : ${employees}">
+        <span>ID: <span th:text="${employee.id}"></span></span>
+        <span>Job:<span th:text="${employee.job}"></span></span>
+        <span>Salary:<span th:text="${employee.salary}"></span></span>
+        <span>First day:<span th:text="${employee.startOfTheWork}"></span></span>
+    </li>
+</ul>
+<form method="post" th:action="@{/employee}" th:object="${newEmployee}">
+    ID: <input th:field="*{id}"/><br/>
+    Job:<input th:field="*{job}"/><br/>
+    Salary:<input th:field="*{salary}"/><br/>
+    First day:<input type="datetime-local" th:field="*{startOfTheWork}"/><br/>
+    <input type="submit" value="add new employee">
+</form>
+
+
+</body>
+</html>
