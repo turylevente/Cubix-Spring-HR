@@ -1,22 +1,18 @@
-package hu.cubix.hr.tlevi.models;
+package hu.cubix.hr.tlevi.dtos;
 
 import java.time.LocalDateTime;
 
-public class Employee {
+public class EmployeeDto {
     private long id;
     private String job;
     private Integer salary;
     private LocalDateTime startOfTheWork;
 
-    public Employee(long id, String job, Integer salary, LocalDateTime startOfTheWork) {
+    public EmployeeDto(long id, String job, Integer salary, LocalDateTime startOfTheWork) {
         this.id = id;
         this.job = job;
         this.salary = salary;
         this.startOfTheWork = startOfTheWork;
-    }
-
-    public Employee() {
-
     }
 
     public long getId() {
@@ -51,3 +47,4 @@ public class Employee {
         this.startOfTheWork = startOfTheWork;
     }
 }
+
