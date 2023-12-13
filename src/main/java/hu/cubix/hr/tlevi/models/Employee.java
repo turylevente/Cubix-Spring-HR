@@ -4,9 +4,18 @@ import java.time.LocalDateTime;
 
 public class Employee {
     private long id;
+    private String name;
     private String job;
     private Integer salary;
     private LocalDateTime startOfTheWork;
+
+    public Employee(long id, String name, String job, Integer salary, LocalDateTime startOfTheWork) {
+        this.id = id;
+        this.name = name;
+        this.job = job;
+        this.salary = salary;
+        this.startOfTheWork = startOfTheWork;
+    }
 
     public Employee(long id, String job, Integer salary, LocalDateTime startOfTheWork) {
         this.id = id;
@@ -25,6 +34,14 @@ public class Employee {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getJob() {

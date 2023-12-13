@@ -15,10 +15,10 @@ import java.util.Map;
 @RestController
 @RequestMapping(path = "api/employees")
 public class EmployeedtoController {
+    private final Map<Long, EmployeeDto> employees = new HashMap<>();
     Employee István = new Employee(1, "job1", 100, LocalDateTime.of(2010, Month.JANUARY, 1, 9, 0));
     Employee Géza = new Employee(2, "job2", 100, LocalDateTime.of(2017, Month.JANUARY, 1, 9, 0));
     Employee Elemér = new Employee(3, "job3", 100, LocalDateTime.of(2023, Month.JANUARY, 1, 9, 0));
-    private Map<Long, EmployeeDto> employees = new HashMap<>();
 
     {
         employees.put(István.getId(), new EmployeeDto(1, "job1", 100, LocalDateTime.of(2010, Month.JANUARY, 1, 9, 0)));
