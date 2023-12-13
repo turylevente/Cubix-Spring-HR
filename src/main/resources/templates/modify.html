@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <form method="post" th:action="@{/modify-employee}" th:object="${setEmployee}">
+            <input type="hidden" th:field="*{id}"/>
+            Name: <input th:field="*{name}"/><br/>
+            Job: <input th:field="*{job}"/><br/>
+            Salary: <input th:field="*{salary}"/><br/>
+            First day: <input type="datetime-local" th:field="*{startOfTheWork}"/><br/>
+            <input type="submit" value="set">
+        </form>
+    </body>
+</html>
