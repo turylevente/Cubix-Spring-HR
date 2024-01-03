@@ -1,7 +1,6 @@
 package hu.cubix.hr.tlevi.contollers;
 
 import hu.cubix.hr.tlevi.models.Employee;
-import hu.cubix.hr.tlevi.services.EmployeeService;
 import hu.cubix.hr.tlevi.services.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

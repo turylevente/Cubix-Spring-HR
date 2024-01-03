@@ -6,10 +6,11 @@ import hu.cubix.hr.tlevi.models.Employee;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class SmartEmployeeService implements EmployeeService {
+public class SmartEmployeeService extends EmployeeServiceImp {
     private HrConfigurationProperties hrConfigurationProperties;
 
     public SmartEmployeeService(HrConfigurationProperties hrConfigurationProperties) {
+        super();
         this.hrConfigurationProperties = hrConfigurationProperties;
     }
 

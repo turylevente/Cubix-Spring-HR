@@ -1,12 +1,14 @@
 package hu.cubix.hr.tlevi.contollers;
 
+import hu.cubix.hr.tlevi.dtos.EmployeeDto;
+import hu.cubix.hr.tlevi.mapper.EmployeeMapper;
 import hu.cubix.hr.tlevi.models.Employee;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -15,9 +17,12 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@Validated
 public class EmployeeController {
     private final List<Employee> employees = new ArrayList<>();
     private Employee employeeToSet;
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
     {
         employees.add(new Employee(1, "István", "job1", 100, LocalDateTime.of(2010, Month.JANUARY, 1, 9, 0)));
@@ -33,12 +38,12 @@ public class EmployeeController {
     }
 
     @PostMapping("/employee")
-    public String addEmployee(Employee employee) {
-        employees.add(employee);
+    public String addEmployee(@Valid EmployeeDto employeedto) {
+        employees.add(employeeMapper.employeeDtoToEmployee(employeedto));
         return "redirect:/";
     }
 
-    @PostMapping("/delete-employee/{id}")
+    @DeleteMapping("/delete-employee/{id}")
     public String deleteEmployee(@PathVariable int id) {
         employees.removeIf(employee -> employee.getId() == id);
         return "redirect:/";
@@ -46,30 +51,35 @@ public class EmployeeController {
 
     @GetMapping("/modify-employee/{id}")
     public String showModifyEmployeeForm(@PathVariable int id, Model model) {
-        model.addAttribute("setEmployee", new Employee());
-        for (Employee employee : employees) {
-            if (employee.getId() == id) {
-                employeeToSet = employee;
-                break;
-            }
-        }
+        employees.stream()
+                .filter(employee -> employee.getId() == id)
+                .findFirst().ifPresent(employeeToSet -> model.addAttribute("setEmployee", employeeToSet));
+
         return "modify";
     }
 
-    @PostMapping("/modify-employee")
-    public String modifyEmployee(@ModelAttribute("setEmployee") Employee setEmployee) {
-        if (setEmployee.getName() != null && !setEmployee.getName().isEmpty()) {
-            employeeToSet.setName(setEmployee.getName());
-        }
-        if (setEmployee.getJob() != null && !setEmployee.getJob().isEmpty()) {
-            employeeToSet.setJob(setEmployee.getJob());
-        }
-        if (setEmployee.getSalary() != null) {
-            employeeToSet.setSalary(setEmployee.getSalary());
-        }
-        if (setEmployee.getStartOfTheWork() != null) {
-            employeeToSet.setStartOfTheWork(setEmployee.getStartOfTheWork());
-        }
+    @PutMapping("/modify-employee")
+    public String modifyEmployee(@ModelAttribute("setEmployee") @Valid EmployeeDto employeeToSet) {
+        Employee employeeToSetDto = employeeMapper.employeeDtoToEmployee(employeeToSet);
+
+        employees.stream()
+                .filter(employee -> employee.getId() == employeeToSetDto.getId())
+                .findFirst()
+                .ifPresent(setEmployee -> {
+                    if (setEmployee.getName() != null && !setEmployee.getName().isEmpty()) {
+                        setEmployee.setName(employeeToSet.getName());
+                    }
+                    if (setEmployee.getJob() != null && !setEmployee.getJob().isEmpty()) {
+                        setEmployee.setJob(employeeToSet.getJob());
+                    }
+                    if (setEmployee.getSalary() != null) {
+                        setEmployee.setSalary(employeeToSet.getSalary());
+                    }
+                    if (setEmployee.getStartOfTheWork() != null) {
+                        setEmployee.setStartOfTheWork(employeeToSet.getStartOfTheWork());
+                    }
+                });
+
         return "redirect:/";
     }
 }

@@ -3,7 +3,8 @@ package hu.cubix.hr.tlevi.services;
 import hu.cubix.hr.tlevi.configurations.HrConfigurationProperties;
 import hu.cubix.hr.tlevi.models.Employee;
 
-public class DefaultEmployeeService implements EmployeeService {
+
+public class DefaultEmployeeService extends EmployeeServiceImp {
 
     private final HrConfigurationProperties hrConfigurationProperties;
 

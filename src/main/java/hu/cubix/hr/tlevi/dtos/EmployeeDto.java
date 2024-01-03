@@ -1,12 +1,24 @@
 package hu.cubix.hr.tlevi.dtos;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 public class EmployeeDto {
+
+    @PositiveOrZero
     private long id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String job;
+    @Positive
     private Integer salary;
+    @Past
     private LocalDateTime startOfTheWork;
 
     public EmployeeDto(long id, String name, String job, Integer salary, LocalDateTime startOfTheWork) {

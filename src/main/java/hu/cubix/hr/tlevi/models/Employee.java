@@ -1,5 +1,7 @@
 package hu.cubix.hr.tlevi.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 public class Employee {
@@ -7,6 +9,7 @@ public class Employee {
     private String name;
     private String job;
     private Integer salary;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime startOfTheWork;
 
     public Employee(long id, String name, String job, Integer salary, LocalDateTime startOfTheWork) {
