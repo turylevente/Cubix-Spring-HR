@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompanyServiceImp implements CompanyService {
@@ -63,7 +66,7 @@ public class CompanyServiceImp implements CompanyService {
             throw new IncorrectIdException();
         } else {
             companies.sort(Comparator.comparing(Company::getId));
-            return FullListOrNot(full).get((int) (id-1));
+            return FullListOrNot(full).get((int) (id - 1));
         }
     }
 
