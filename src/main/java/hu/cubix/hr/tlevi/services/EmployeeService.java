@@ -6,6 +6,7 @@ import hu.cubix.hr.tlevi.models.Employee;
 import java.util.List;
 
 public interface EmployeeService {
+
     int getPayRaisePercent(Employee employee);
 
     List<EmployeeDto> findAll();

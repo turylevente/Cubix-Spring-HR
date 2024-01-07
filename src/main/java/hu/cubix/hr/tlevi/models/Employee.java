@@ -1,10 +1,16 @@
 package hu.cubix.hr.tlevi.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
+@Entity
 public class Employee {
+    @Id
+    @GeneratedValue
     private long id;
     private String name;
     private String job;
