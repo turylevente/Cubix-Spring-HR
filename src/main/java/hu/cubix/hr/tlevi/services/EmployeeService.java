@@ -9,15 +9,15 @@ public interface EmployeeService {
 
     int getPayRaisePercent(Employee employee);
 
-    List<EmployeeDto> findAll();
+    List<Employee> findAll();
 
-    EmployeeDto createEmployee(EmployeeDto employeeDto);
+    Employee createEmployee(Employee employee);
 
-    List<EmployeeDto> listEmployeesWithHigherSalary(int limit);
+    List<Employee> listEmployeesWithHigherSalary(int limit);
 
-    EmployeeDto getEmployeeById(long id);
+    Employee getEmployeeById(long id);
 
     void deleteEmployeeById(long id);
 
-    EmployeeDto modifyEmployeeId(EmployeeDto employeeDto, long id);
+    Employee modifyEmployeeId(EmployeeDto employeeDto, long id);
 }

@@ -1,5 +1,8 @@
 package hu.cubix.hr.tlevi.dtos;
 
+import hu.cubix.hr.tlevi.enums.CompanyTypes;
+import hu.cubix.hr.tlevi.models.Employee;
+
 import java.util.List;
 
 public class CompanyDTO {
@@ -7,17 +10,28 @@ public class CompanyDTO {
     private long registationNumber;
     private String name;
     private String adress;
-    private List<EmployeeDto> employeeDtoList;
+    private List<Employee> employeeList;
+    private CompanyTypes type;
+
 
     public CompanyDTO() {
     }
 
-    public CompanyDTO(long id, int registationNumber, String name, String adress, List<EmployeeDto> employeeDtoList) {
+    public CompanyDTO(long id, int registationNumber, String name, String adress, List<Employee> employeeList) {
         this.id = id;
         this.registationNumber = registationNumber;
         this.name = name;
         this.adress = adress;
-        this.employeeDtoList = employeeDtoList;
+        this.employeeList = employeeList;
+    }
+
+    public CompanyDTO(long id, long registationNumber, String name, String adress, List<Employee> employeeList, CompanyTypes type) {
+        this.id = id;
+        this.registationNumber = registationNumber;
+        this.name = name;
+        this.adress = adress;
+        this.employeeList = employeeList;
+        this.type = type;
     }
 
     public long getId() {
@@ -32,7 +46,7 @@ public class CompanyDTO {
         return registationNumber;
     }
 
-    public void setRegistationNumber(int registationNumber) {
+    public void setRegistationNumber(long registationNumber) {
         this.registationNumber = registationNumber;
     }
 
@@ -52,11 +66,19 @@ public class CompanyDTO {
         this.adress = adress;
     }
 
-    public List<EmployeeDto> getEmployeeDtoList() {
-        return employeeDtoList;
+    public List<Employee> getEmployeeList() {
+        return employeeList;
     }
 
-    public void setEmployeeDtoList(List<EmployeeDto> employeeDtoList) {
-        this.employeeDtoList = employeeDtoList;
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
+    public CompanyTypes getType() {
+        return type;
+    }
+
+    public void setType(CompanyTypes type) {
+        this.type = type;
     }
 }

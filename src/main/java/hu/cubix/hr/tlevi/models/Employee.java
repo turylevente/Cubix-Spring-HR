@@ -1,8 +1,7 @@
 package hu.cubix.hr.tlevi.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -12,13 +11,29 @@ public class Employee {
     @Id
     @GeneratedValue
     private long id;
+    @Column(name = "employee_name")
     private String name;
-    private String job;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JsonBackReference("employee-job")
+
+    private Job job;
     private Integer salary;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime startOfTheWork;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonBackReference("employee-company")
+    private Company company;
 
-    public Employee(long id, String name, String job, Integer salary, LocalDateTime startOfTheWork) {
+    public Employee(long id, String name, Job job, Integer salary, LocalDateTime startOfTheWork, Company company) {
+        this.id = id;
+        this.name = name;
+        this.job = job;
+        this.salary = salary;
+        this.startOfTheWork = startOfTheWork;
+        this.company = company;
+    }
+
+    public Employee(long id, String name, Job job, Integer salary, LocalDateTime startOfTheWork) {
         this.id = id;
         this.name = name;
         this.job = job;
@@ -26,7 +41,7 @@ public class Employee {
         this.startOfTheWork = startOfTheWork;
     }
 
-    public Employee(long id, String job, Integer salary, LocalDateTime startOfTheWork) {
+    public Employee(long id, Job job, Integer salary, LocalDateTime startOfTheWork) {
         this.id = id;
         this.job = job;
         this.salary = salary;
@@ -35,6 +50,9 @@ public class Employee {
 
     public Employee() {
 
+    }
+
+    public Employee(int i, String elemér, String job3, int i1, LocalDateTime of) {
     }
 
     public long getId() {
@@ -53,11 +71,11 @@ public class Employee {
         this.name = name;
     }
 
-    public String getJob() {
+    public Job getJob() {
         return job;
     }
 
-    public void setJob(String job) {
+    public void setJob(Job job) {
         this.job = job;
     }
 
@@ -75,5 +93,13 @@ public class Employee {
 
     public void setStartOfTheWork(LocalDateTime startOfTheWork) {
         this.startOfTheWork = startOfTheWork;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

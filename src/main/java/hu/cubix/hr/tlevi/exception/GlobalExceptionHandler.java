@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = IncorrectIdException.class)
-    public ResponseEntity<Object> handleIncorrectIdException(IncorrectIdException exception) {
+    public ResponseEntity<Object> handleInCorrectIdException(IncorrectIdException exception) {
+        return new ResponseEntity<>(new ErrorDto("error", exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(value = WrongRegistrationNumber.class)
+    public ResponseEntity<Object> handleInCorrectRegNumException(WrongRegistrationNumber exception) {
         return new ResponseEntity<>(new ErrorDto("error", exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }

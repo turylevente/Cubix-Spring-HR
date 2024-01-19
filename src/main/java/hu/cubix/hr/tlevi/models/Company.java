@@ -1,25 +1,43 @@
 package hu.cubix.hr.tlevi.models;
 
-import hu.cubix.hr.tlevi.dtos.EmployeeDto;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import hu.cubix.hr.tlevi.enums.CompanyTypes;
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
 public class Company {
+    @Id
+    @GeneratedValue
     private long id;
     private long registationNumber;
     private String name;
     private String adress;
-    private List<EmployeeDto> employeeDtoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company", fetch = FetchType.LAZY)
+    @JsonManagedReference("employee-company")
+    private List<Employee> employeeList;
+    @Enumerated(EnumType.STRING)
+    private CompanyTypes type;
 
     public Company() {
     }
 
-    public Company(long id, int registationNumber, String name, String adress, List<EmployeeDto> employeeDtoList) {
+    public Company(long id, int registationNumber, String name, String adress, List<Employee> employeeList) {
         this.id = id;
         this.registationNumber = registationNumber;
         this.name = name;
         this.adress = adress;
-        this.employeeDtoList = employeeDtoList;
+        this.employeeList = employeeList;
+    }
+
+    public Company(long id, long registationNumber, String name, String adress, List<Employee> employeeList, CompanyTypes type) {
+        this.id = id;
+        this.registationNumber = registationNumber;
+        this.name = name;
+        this.adress = adress;
+        this.employeeList = employeeList;
+        this.type = type;
     }
 
     public long getId() {
@@ -34,7 +52,7 @@ public class Company {
         return registationNumber;
     }
 
-    public void setRegistationNumber(int registationNumber) {
+    public void setRegistationNumber(long registationNumber) {
         this.registationNumber = registationNumber;
     }
 
@@ -54,11 +72,20 @@ public class Company {
         this.adress = adress;
     }
 
-    public List<EmployeeDto> getEmployeeDtoList() {
-        return employeeDtoList;
+    public List<Employee> getEmployeeList() {
+        return employeeList;
     }
 
-    public void setEmployeeDtoList(List<EmployeeDto> employeeDtoList) {
-        this.employeeDtoList = employeeDtoList;
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
+
+    public CompanyTypes getType() {
+        return type;
+    }
+
+    public void setType(CompanyTypes type) {
+        this.type = type;
+    }
+
 }

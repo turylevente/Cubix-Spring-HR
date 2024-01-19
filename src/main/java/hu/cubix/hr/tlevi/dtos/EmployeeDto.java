@@ -1,5 +1,7 @@
 package hu.cubix.hr.tlevi.dtos;
 
+import hu.cubix.hr.tlevi.models.Company;
+import hu.cubix.hr.tlevi.models.Job;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
@@ -13,14 +15,14 @@ public class EmployeeDto {
     private long id;
     @NotEmpty
     private String name;
-    @NotEmpty
-    private String job;
+    private Job job;
     @Positive
     private Integer salary;
     @Past
     private LocalDateTime startOfTheWork;
+    private Company company;
 
-    public EmployeeDto(long id, String name, String job, Integer salary, LocalDateTime startOfTheWork) {
+    public EmployeeDto(long id, String name, Job job, Integer salary, LocalDateTime startOfTheWork) {
         this.id = id;
         this.name = name;
         this.job = job;
@@ -28,11 +30,10 @@ public class EmployeeDto {
         this.startOfTheWork = startOfTheWork;
     }
 
-    public EmployeeDto(long id, String job, Integer salary, LocalDateTime startOfTheWork) {
-        this.id = id;
-        this.job = job;
-        this.salary = salary;
-        this.startOfTheWork = startOfTheWork;
+    public EmployeeDto(long id, String name, String job, Integer salary, LocalDateTime startOfTheWork, Company company) {
+        super();
+        this.company = company;
+
     }
 
     public EmployeeDto() {
@@ -54,11 +55,11 @@ public class EmployeeDto {
         this.name = name;
     }
 
-    public String getJob() {
+    public Job getJob() {
         return job;
     }
 
-    public void setJob(String job) {
+    public void setJob(Job job) {
         this.job = job;
     }
 
@@ -76,6 +77,14 @@ public class EmployeeDto {
 
     public void setStartOfTheWork(LocalDateTime startOfTheWork) {
         this.startOfTheWork = startOfTheWork;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }
 

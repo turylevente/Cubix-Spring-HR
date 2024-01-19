@@ -22,4 +22,5 @@ public interface CompanyMapper {
 
     List<CompanyWithoutEmployeesDTO> companiesToCompaniesWithoutEmployeesDTO(List<Company> companies);
 
+    List<Company> companyDtosToCompanyList(List<CompanyDTO> companyDtos);
 }

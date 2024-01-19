@@ -69,7 +69,7 @@ public class EmployeeController {
                     if (setEmployee.getName() != null && !setEmployee.getName().isEmpty()) {
                         setEmployee.setName(employeeToSet.getName());
                     }
-                    if (setEmployee.getJob() != null && !setEmployee.getJob().isEmpty()) {
+                    if (setEmployee.getJob() != null && setEmployee.getJob() != null) {
                         setEmployee.setJob(employeeToSet.getJob());
                     }
                     if (setEmployee.getSalary() != null) {

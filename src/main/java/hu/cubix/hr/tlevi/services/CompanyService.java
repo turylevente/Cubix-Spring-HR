@@ -1,24 +1,24 @@
 package hu.cubix.hr.tlevi.services;
 
-import hu.cubix.hr.tlevi.dtos.CompanyDTO;
-import hu.cubix.hr.tlevi.dtos.EmployeeDto;
+import hu.cubix.hr.tlevi.models.Company;
+import hu.cubix.hr.tlevi.models.Employee;
 
 import java.util.List;
 
 public interface CompanyService {
     List<?> findAll(Boolean full);
 
-    Object getCompanyById(long id, Boolean full);
+    Company getCompanyById(long id, Boolean full);
 
-    CompanyDTO createCompany(CompanyDTO companyDTO);
+    Company createCompany(Company company);
 
     void deleteCompanyById(long id);
 
-    CompanyDTO modifyEmployeeById(CompanyDTO companyDTO, long id);
+    Company modifyCompanyById(Company company, long id);
 
-    CompanyDTO addEmployeeToCompany(long id, EmployeeDto employeedto);
+    Company addEmployeeToCompany(long id, Employee employee);
 
-    CompanyDTO exchangeEmployeesAtCompany(List<EmployeeDto> list, long id);
+    Company exchangeEmployeesAtCompany(List<Employee> list, long id);
 
-    void deleteEmployeeFromCompany(long cid, long eid);
+    void deleteEmployeeFromCompany(long companyId, long employeeIdd);
 }
