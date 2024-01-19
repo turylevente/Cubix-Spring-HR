@@ -2,13 +2,16 @@ package hu.cubix.hr.tlevi.services;
 
 import hu.cubix.hr.tlevi.models.Company;
 import hu.cubix.hr.tlevi.models.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface CompanyService {
-    List<?> findAll(Boolean full);
+    Page<Company> findAll(Pageable pageable);
 
-    Company getCompanyById(long id, Boolean full);
+
+    Company getCompanyById(long id);
 
     Company createCompany(Company company);
 
