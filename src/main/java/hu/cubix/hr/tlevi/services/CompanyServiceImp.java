@@ -8,6 +8,8 @@ import hu.cubix.hr.tlevi.repositories.CompanyRepository;
 import hu.cubix.hr.tlevi.repositories.EmployeeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,13 +23,8 @@ public class CompanyServiceImp implements CompanyService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public List<?> findAll(Boolean full) {
-        if (!full) {
-            for (Company company : companyRepository.findAll())
-                company.setEmployeeList(null);
-        }
-        return companyRepository.findAll();
-
+    public Page<Company> findAll(Pageable pageable) {
+        return companyRepository.findAll(pageable);
     }
 
 
@@ -47,14 +44,11 @@ public class CompanyServiceImp implements CompanyService {
         }
     }
 
-    public Company getCompanyById(long id, Boolean full) {
+    public Company getCompanyById(long id) {
         Optional<Company> optionalCompany = companyRepository.findById(id);
         if (optionalCompany.isEmpty()) {
             throw new IncorrectIdException();
         } else {
-            if (!full) {
-                optionalCompany.get().setEmployeeList(null);
-            }
             return optionalCompany.get();
         }
     }

@@ -4,9 +4,14 @@ import hu.cubix.hr.tlevi.dtos.CompanyDTO;
 import hu.cubix.hr.tlevi.dtos.EmployeeDto;
 import hu.cubix.hr.tlevi.mapper.CompanyMapper;
 import hu.cubix.hr.tlevi.mapper.EmployeeMapper;
+import hu.cubix.hr.tlevi.models.Company;
 import hu.cubix.hr.tlevi.repositories.CompanyRepository;
 import hu.cubix.hr.tlevi.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,13 +30,27 @@ public class CompanydtoController {
     EmployeeMapper employeeMapper;
 
     @GetMapping
-    public ResponseEntity<?> getCompanies(@RequestParam Boolean full) {
-        return ResponseEntity.ok(companyService.findAll(full));
+    public ResponseEntity<?> getCompanies(@RequestParam(required = false) Boolean full,
+                                          @RequestParam(defaultValue = "1") int page,
+                                          @RequestParam(defaultValue = "3") int size,
+                                          @RequestParam(defaultValue = "id") String sortBy) {
+        Pageable pageable = PageRequest.of((page-1), size, Sort.by(sortBy));
+        if (full) {
+            Page<Company> companyPage = companyService.findAll(pageable);
+            return ResponseEntity.ok(companyPage.getContent());
+        } else {
+            Page<CompanyDTO> companyDtoPage = companyService.findAll(pageable).map(companyMapper::companyToCompanyDto);
+            return ResponseEntity.ok(companyDtoPage.getContent());
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CompanyDTO> getCompanyById(@PathVariable long id, @RequestParam Boolean full) {
-        return ResponseEntity.ok(companyMapper.companyToCompanyDto(companyService.getCompanyById(id, full)));
+    public ResponseEntity<?> getCompanyById(@PathVariable long id, @RequestParam Boolean full) {
+        if (full) {
+            return ResponseEntity.ok(companyMapper.companyToCompanyDto(companyService.getCompanyById(id)));
+        } else {
+            return (ResponseEntity.ok(companyMapper.companyToCompanyWithoutEmployeesDTO(companyService.getCompanyById(id))));
+        }
     }
 
 
