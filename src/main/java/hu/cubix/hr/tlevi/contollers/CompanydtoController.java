@@ -35,21 +35,13 @@ public class CompanydtoController {
                                           @RequestParam(defaultValue = "1") int page,
                                           @RequestParam(defaultValue = "3") int size,
                                           @RequestParam(defaultValue = "id") String sortBy) {
-        Pageable pageable = PageRequest.of((page-1), size, Sort.by(sortBy));
+        Pageable pageable = PageRequest.of((page - 1), size, Sort.by(sortBy));
         if (full) {
-<<<<<<< Updated upstream
-            Page<Company> companyPage = companyService.findAll(pageable);
-            return ResponseEntity.ok(companyPage.getContent());
-        } else {
-            Page<CompanyDTO> companyDtoPage = companyService.findAll(pageable).map(companyMapper::companyToCompanyDto);
-            return ResponseEntity.ok(companyDtoPage.getContent());
-=======
             Page<CompanyDTO> companyDtoPage = companyService.findAll(pageable).map(companyMapper::companyToCompanyDto);
             return ResponseEntity.ok(companyDtoPage.getContent());
         } else {
             Page<CompanyWithoutEmployeesDTO> CompanyWithoutEmployeesPage = companyService.findAll(pageable).map(companyMapper::companyToCompanyWithoutEmployeesDTO);
             return ResponseEntity.ok(CompanyWithoutEmployeesPage.getContent());
->>>>>>> Stashed changes
         }
     }
 
